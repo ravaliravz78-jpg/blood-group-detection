@@ -6,6 +6,31 @@ from tensorflow.keras.models import load_model
 import os
 import gdown
 
+def set_background(color):
+    st.markdown(
+        f"""
+        <style>
+.stApp {
+    background-color: {color};
+}
+
+div[data-testid="metric-container"] {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.main-title {
+    text-align: center;
+    color: #B71C1C;
+}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
+
 # -----------------------------
 # SESSION STATE
 # -----------------------------
@@ -32,7 +57,7 @@ classes = ['A', 'AB', 'B', 'O']
 # -----------------------------
 # SIDEBAR
 # -----------------------------
-st.sidebar.title("Navigation")
+st.sidebar.title("🩸 Navigation")
 
 st.sidebar.info("""
 Fingerprint Based Blood Group Detection
@@ -47,6 +72,8 @@ Using CNN Deep Learning
 # -----------------------------
 if st.session_state.page == "home":
 
+    set_background("#FFFFFF")
+
     st.markdown("""
     # 🩸 Fingerprint Blood Group Detection System
 
@@ -60,6 +87,8 @@ if st.session_state.page == "home":
         use_container_width=True
     )
 
+    st.success("Welcome to the Fingerprint Blood Group Detection System")
+
     st.write("### Team Members")
 
     st.write("• Ravali")
@@ -69,30 +98,33 @@ if st.session_state.page == "home":
     if st.button("🚀 Get Started"):
         st.session_state.page = "about"
         st.rerun()
-
 # -----------------------------
 # ABOUT PAGE
 # -----------------------------
 elif st.session_state.page == "about":
 
+    set_background("#E8F5E9")
+
     st.title("📖 About Project")
 
+    st.info("CNN-based healthcare application for blood group prediction.")
+
     st.write("""
-    This project predicts blood groups using
-    fingerprint images and a Convolutional
-    Neural Network (CNN).
+This project predicts blood groups using
+fingerprint images and a Convolutional
+Neural Network (CNN).
 
-    Technologies Used:
+Technologies Used:
 
-    • Python
-    • TensorFlow
-    • Keras
-    • OpenCV
-    • Streamlit
+• Python
+• TensorFlow
+• Keras
+• OpenCV
+• Streamlit
 
-    Dataset:
-    Fingerprint Blood Group Dataset
-    """)
+Dataset:
+Fingerprint Blood Group Dataset
+""")
 
     col1, col2 = st.columns(2)
 
@@ -105,13 +137,16 @@ elif st.session_state.page == "about":
         if st.button("➡ Continue"):
             st.session_state.page = "upload"
             st.rerun()
-
 # -----------------------------
 # UPLOAD PAGE
 # -----------------------------
 elif st.session_state.page == "upload":
 
+    set_background("#E3F2FD")  # Light Blue
+
     st.title("🔍 Fingerprint Analysis")
+
+    st.success("Upload a fingerprint image to begin prediction.")
 
     uploaded_file = st.file_uploader(
         "Upload Fingerprint Image",
@@ -151,17 +186,15 @@ elif st.session_state.page == "upload":
         # Metric Cards
         col1, col2 = st.columns(2)
 
-        with col1:
-            st.metric(
-                "Blood Group",
-                classes[predicted_class]
-            )
+with col1:
+    if st.button("⬅ Back to About"):
+        st.session_state.page = "about"
+        st.rerun()
 
-        with col2:
-            st.metric(
-                "Confidence",
-                f"{confidence:.2f}%"
-            )
+with col2:
+    if st.button("👨‍💻 Team Details"):
+        st.session_state.page = "team"
+        st.rerun()
 
         # Report Download
         report = f"""
@@ -278,29 +311,40 @@ Fingerprint Blood Group Detection System
 # -----------------------------
 elif st.session_state.page == "team":
 
+    set_background("#FFF3E0")
+
     st.title("👨‍💻 Team Information")
 
+    st.balloons()
+
     st.write("""
-    Project Title:
-    Fingerprint Blood Group Detection System
+Project Title:
+Fingerprint Blood Group Detection System
 
-    Team Members:
+Team Members:
 
-    • Ravali
-    • Anusha
-    • Yeshashwi
+• Ravali
+• Anusha
+• Yeshashwi
 
-    Department:
-    CSE (AI & ML)
+Department:
+CSE (AI & ML)
 
-    College:
-    Methodist College of Engineering and Technology
-    """)
+College:
+Methodist College of Engineering and Technology
+""")
 
-    if st.button("🏠 Home"):
-        st.session_state.page = "home"
-        st.rerun()
+    col1, col2 = st.columns(2)
 
+    with col1:
+        if st.button("⬅ Back"):
+            st.session_state.page = "upload"
+            st.rerun()
+
+    with col2:
+        if st.button("🏠 Home"):
+            st.session_state.page = "home"
+            st.rerun()
 # -----------------------------
 # FOOTER
 # -----------------------------
