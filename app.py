@@ -84,7 +84,7 @@ if st.session_state.page == "home":
 
     st.image(
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
-        use_container_width=True
+        width="stretch"
     )
 
     st.success("Welcome to the Fingerprint Blood Group Detection System")
@@ -110,21 +110,21 @@ elif st.session_state.page == "about":
     st.info("CNN-based healthcare application for blood group prediction.")
 
     st.write("""
-This project predicts blood groups using
-fingerprint images and a Convolutional
-Neural Network (CNN).
+        This project predicts blood groups using
+        fingerprint images and a Convolutional
+        Neural Network (CNN).
 
-Technologies Used:
+        Technologies Used:
 
-• Python
-• TensorFlow
-• Keras
-• OpenCV
-• Streamlit
+        • Python
+        • TensorFlow
+        • Keras
+        • OpenCV
+        • Streamlit
 
-Dataset:
-Fingerprint Blood Group Dataset
-""")
+        Dataset:
+        Fingerprint Blood Group Dataset
+        """)
 
     col1, col2 = st.columns(2)
 
@@ -142,7 +142,7 @@ Fingerprint Blood Group Dataset
 # -----------------------------
 elif st.session_state.page == "upload":
 
-    set_background("#E3F2FD")  # Light Blue
+    set_background("#E3F2FD")
 
     st.title("🔍 Fingerprint Analysis")
 
@@ -152,6 +152,19 @@ elif st.session_state.page == "upload":
         "Upload Fingerprint Image",
         type=["png", "jpg", "jpeg", "bmp"]
     )
+
+    # Navigation Buttons
+    nav1, nav2 = st.columns(2)
+
+    with nav1:
+        if st.button("⬅ Back to About"):
+            st.session_state.page = "about"
+            st.rerun()
+
+    with nav2:
+        if st.button("👨‍💻 Team Details"):
+            st.session_state.page = "team"
+            st.rerun()
 
     if uploaded_file is not None:
 
@@ -166,16 +179,13 @@ elif st.session_state.page == "upload":
         )
 
         img = cv2.resize(img, (128, 128))
-
         img = img / 255.0
-
         img = img.reshape(1, 128, 128, 1)
 
         with st.spinner("Analyzing Fingerprint..."):
             prediction = model.predict(img)
 
         predicted_class = np.argmax(prediction)
-
         confidence = np.max(prediction) * 100
 
         st.image(
@@ -186,15 +196,17 @@ elif st.session_state.page == "upload":
         # Metric Cards
         col1, col2 = st.columns(2)
 
-with col1:
-    if st.button("⬅ Back to About"):
-        st.session_state.page = "about"
-        st.rerun()
+        with col1:
+            st.metric(
+                "Blood Group",
+                classes[predicted_class]
+            )
 
-with col2:
-    if st.button("👨‍💻 Team Details"):
-        st.session_state.page = "team"
-        st.rerun()
+        with col2:
+            st.metric(
+                "Confidence",
+                f"{confidence:.2f}%"
+            )
 
         # Report Download
         report = f"""
@@ -223,7 +235,6 @@ Fingerprint Blood Group Detection System
         }
 
         st.subheader("Blood Group Information")
-
         st.write(
             blood_info[classes[predicted_class]]
         )
@@ -257,57 +268,45 @@ Fingerprint Blood Group Detection System
         st.subheader("Dataset Statistics")
 
         st.write("""
-        Total Images Used: 6000
+Total Images Used: 6000
 
-        A Group : 1500
-
-        AB Group : 1500
-
-        B Group : 1500
-
-        O Group : 1500
-        """)
+A Group : 1500
+AB Group : 1500
+B Group : 1500
+O Group : 1500
+""")
 
         st.write("---")
 
         st.subheader("Model Information")
 
         st.write("""
-        Model Type: Convolutional Neural Network (CNN)
+Model Type: Convolutional Neural Network (CNN)
 
-        Input Image Size: 128 × 128 pixels
+Input Image Size: 128 × 128 pixels
 
-        Training Images: 6000
+Training Images: 6000
 
-        Training Epochs: 5
+Training Epochs: 5
 
-        Output Classes: A, AB, B, O
+Output Classes: A, AB, B, O
 
-        Framework: TensorFlow & Keras
-        """)
+Framework: TensorFlow & Keras
+""")
 
         st.subheader("Project Information")
 
         st.write("""
-        Dataset Used: Fingerprint Blood Group Dataset
+Dataset Used: Fingerprint Blood Group Dataset
 
-        Algorithm: Convolutional Neural Network (CNN)
+Algorithm: Convolutional Neural Network (CNN)
 
-        Classes:
-        • A
-        • AB
-        • B
-        • O
-        """)
-
-        st.write("---")
-        st.caption(
-             "Developed by Ravali, Anusha, Yeshashwi | Fingerprint Blood Group Detection System"
-        )
-
-        if st.button("👨‍💻 View Team Details"):
-            st.session_state.page = "team"
-            st.rerun()
+Classes:
+• A
+• AB
+• B
+• O
+""")
 
 # -----------------------------
 # TEAM PAGE
@@ -321,21 +320,21 @@ elif st.session_state.page == "team":
     st.balloons()
 
     st.write("""
-Project Title:
-Fingerprint Blood Group Detection System
+        Project Title:
+        Fingerprint Blood Group Detection System
 
-Team Members:
+        Team Members:
 
-• Ravali
-• Anusha
-• Yeshashwi
+        • Ravali
+        • Anusha
+        • Yeshashwi
 
-Department:
-CSE (AI & ML)
+        Department:
+        CSE (AI & ML)
 
-College:
-Methodist College of Engineering and Technology
-""")
+        College:
+        Methodist College of Engineering and Technology
+        """)
 
     col1, col2 = st.columns(2)
 
