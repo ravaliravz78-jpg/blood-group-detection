@@ -30,7 +30,7 @@ def set_background(color):
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
-            border-left: 6px solid #B71C1C;
+            border-left: 6px solid #D32F2F;
         }}
 
         .stButton > button {{
@@ -41,14 +41,18 @@ def set_background(color):
             border: none !important;
         }}
 
-        .stButton > button:hover {{
-            background-color: #8E0000 !important;
+        .stButton > button p {{
             color: white !important;
         }}
 
         section[data-testid="stFileUploader"] > div {{
-            background-color: #E8F4FD !important;
-            border: 2px solid #1976D2 !important;
+            background: linear-gradient(
+            135deg,
+            #E3F2FD,
+            #BBDEFB
+            ) !important;
+
+            border: 2px solid #1565C0 !important;
             border-radius: 15px !important;
         }}
 
@@ -103,15 +107,13 @@ st.sidebar.info("""
 # -----------------------------
 if st.session_state.page == "home":
 
-    set_background("#F5F9FF")
+    set_background("#F4F8FB")
 
     st.markdown("""
-    # 🩸 Blood Group Detection Using Fingerprint Images
-
-    ### Deep Learning Based Healthcare Application
-
-    Predict Blood Group using Fingerprint Images and CNN
-    """)
+        <h1 style='text-align:center;color:#B71C1C;'>
+            🩸 Blood Group Detection Using Fingerprint Images
+        </h1>
+    """, unsafe_allow_html=True)
 
     st.image(
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
@@ -173,7 +175,7 @@ elif st.session_state.page == "about":
 # -----------------------------
 elif st.session_state.page == "upload":
 
-    set_background("#E3F2FD")
+    set_background("#EAF4FF")
 
     st.title("🔍 Fingerprint Analysis")
 
@@ -344,7 +346,7 @@ elif st.session_state.page == "upload":
 # -----------------------------
 elif st.session_state.page == "team":
 
-    set_background("#FCE4EC")
+    set_background("#FFF8F8")
 
     st.title("👨‍💻 Team Information")
 
