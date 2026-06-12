@@ -10,23 +10,23 @@ def set_background(color):
     st.markdown(
         f"""
         <style>
-.stApp {
-    background-color: {color};
-}
+        .stApp {{
+            background-color: {color};
+        }}
 
-div[data-testid="metric-container"] {
-    background-color: white;
-    border: 2px solid #e0e0e0;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-}
+        div[data-testid="metric-container"] {{
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }}
 
-.main-title {
-    text-align: center;
-    color: #B71C1C;
-}
-</style>
+        .main-title {{
+            text-align: center;
+            color: #B71C1C;
+        }}
+        </style>
         """,
         unsafe_allow_html=True
     )
