@@ -14,6 +14,10 @@ def set_background(color):
             background-color: {color};
         }}
 
+        h1, h2, h3, h4, h5, h6, p, div, label, span {{
+            color: black !important;
+        }}
+
         div[data-testid="metric-container"] {{
             background-color: white;
             border: 2px solid #e0e0e0;
@@ -24,8 +28,9 @@ def set_background(color):
 
         .main-title {{
             text-align: center;
-            color: #B71C1C;
+            color: #B71C1C !important;
         }}
+
         </style>
         """,
         unsafe_allow_html=True
@@ -84,7 +89,7 @@ if st.session_state.page == "home":
 
     st.image(
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
-        width="stretch"
+        use_container_width=True
     )
 
     st.success("Welcome to the Fingerprint Blood Group Detection System")
