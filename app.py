@@ -301,6 +301,9 @@ Fingerprint Blood Group Detection System
         """)
 
         st.write("---")
+        st.caption(
+             "Developed by Ravali, Anusha, Yeshashwi | Fingerprint Blood Group Detection System"
+        )
 
         if st.button("👨‍💻 View Team Details"):
             st.session_state.page = "team"
